@@ -12,6 +12,8 @@ const criarTarefa = (evento) => { // oq o evento vai fazer
 
     tarefa.innerHTML = conteudo
 
+    tarefa.appendChild(BotaoConcui()) //dentro do item da lista 'li' vai junto tbm criar um botão de confirmação
+
     lista.appendChild(tarefa)
     
     input.value = " " //esvazia o campo depois
@@ -19,7 +21,25 @@ const criarTarefa = (evento) => { // oq o evento vai fazer
 
 const novaTarefa = document.querySelector('[data-form-button]') //selecionando o elemento que vai receber o evento
 
-
-
 novaTarefa.addEventListener('click', criarTarefa) //click é o evento e criarTarefa é oq ele vai fazer (reação)
 
+
+const BotaoConcui = () => {
+    const botaoConclui = document.createElement('button') //cria o elemento botão
+
+    botaoConclui.classList.add('check-button') 
+    botaoConclui.innerText = 'Concluir' //texto do botão
+
+    botaoConclui.addEventListener('click', concluirTarefa)
+
+    return botaoConclui
+}
+
+const concluirTarefa = (evento) => {
+    const botaoConclui = evento.target
+
+    const tarefaCompleta = botaoConclui.parentElement
+
+    tarefaCompleta.classList.toggle('done')
+
+}
