@@ -1,4 +1,5 @@
-const criarTarefa = (evento) => { // oq o evento vai fazer
+( () => {  // IIFE = função de invocação imdeiata
+    const criarTarefa = (evento) => { // oq o evento vai fazer
     evento.preventDefault() // impede que o form haja como formulario mesmo, não realizando POST ao clicar
 
     const lista = document.querySelector('[data-list]') // selecionando elemento 
@@ -13,6 +14,7 @@ const criarTarefa = (evento) => { // oq o evento vai fazer
     tarefa.innerHTML = conteudo
 
     tarefa.appendChild(BotaoConcui()) //dentro do item da lista 'li' vai junto tbm criar um botão de confirmação
+    tarefa.appendChild(BotaoDeleta())
 
     lista.appendChild(tarefa)
     
@@ -43,3 +45,23 @@ const concluirTarefa = (evento) => {
     tarefaCompleta.classList.toggle('done')
 
 }
+
+const BotaoDeleta = () => {
+    const botaoDeleta = document.createElement('button')
+
+    botaoDeleta.innerText = 'Deletado'
+    botaoDeleta.addEventListener('click', deletarTarefa)
+    return botaoDeleta
+}
+
+const deletarTarefa = (evento) =>{
+    const botaoDeleta = evento.target
+    
+    const tarefaCompleta = botaoDeleta.parentElement // pega o elemento pai do botaoDeleta (que é a li)
+
+    tarefaCompleta.remove()
+
+    return botaoDeleta
+}
+
+}) () // chamando a função IIFE
